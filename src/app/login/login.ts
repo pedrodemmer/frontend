@@ -7,7 +7,6 @@ import { Auth } from '../auth';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './login.html',
-  styleUrls: ['./login.scss']
 })
 export class Login {
   form: FormGroup;

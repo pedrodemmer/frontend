@@ -1,5 +1,4 @@
-
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Auth } from '../auth';
@@ -10,7 +9,6 @@ import { Viacep } from '../viacep';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './register.html',
-  styleUrls: ['./register.scss'],
 })
 export class Register {
   form: FormGroup;
@@ -49,5 +47,3 @@ export class Register {
     }
   }
 }
-
-import { ReactiveFormsModule } from '@angular/forms';
