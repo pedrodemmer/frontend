@@ -1,13 +1,24 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
-	<h2>Login</h2>
-	<div>
-		<label for="email">Email:</label>
-		<input type="email" id="email" formControlName="email" required>
-	</div>
-	<div>
-		<label for="password">Senha:</label>
-		<input type="password" id="password" formControlName="password" required>
-	</div>
-	<button type="submit">Entrar</button>
-	<div *ngIf="message">{{ message }}</div>
+<form [formGroup]="form" (ngSubmit)="submit()" class="container mt-5 p-4 bg-white rounded shadow" style="max-width: 400px;">
+  <h2 class="text-center mb-4">Login</h2>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" id="email" formControlName="email" class="form-control" required placeholder="Ex: rogerio@email.com">
+    <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="text-danger small">
+      Email válido é obrigatório.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Senha</label>
+    <input type="password" id="password" formControlName="password" class="form-control" required placeholder="Ex: suaSenha123">
+    <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="text-danger small">
+      Senha é obrigatória.
+    </div>
+  </div>
+  <div class="d-flex justify-content-center mt-3">
+    <button type="submit" class="btn btn-primary px-5">Entrar</button>
+  </div>
+  <div class="d-flex justify-content-center mt-2">
+    <a routerLink="/register" routerLinkActive="active" class="btn btn-link">Registrar</a>
+  </div>
+  <div *ngIf="message" class="text-center text-danger mt-2">{{ message }}</div>
 </form>
