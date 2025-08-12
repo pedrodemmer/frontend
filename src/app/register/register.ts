@@ -3,15 +3,18 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Auth } from '../auth';
 import { Viacep } from '../viacep';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './register.html',
 })
 export class Register {
   form: FormGroup;
+  message: string = '';
+  
   constructor(private fb: FormBuilder, private auth: Auth, private viacep: Viacep) {
     this.form = this.fb.group({
       nome: ['', Validators.required],
@@ -43,7 +46,16 @@ export class Register {
 
   submit() {
     if (this.form.valid && this.form.value.senha === this.form.value.confirmarSenha) {
-      this.auth.register(this.form.value);
+      this.auth.register(this.form.value).subscribe({
+        next: (res) => {
+          this.message = res.message || 'Registrado com sucesso!';
+        },
+        error: (err) => {
+          this.message = err.error?.message || 'Erro ao registrar!';
+        }
+      });
+    } else {
+      this.message = 'Preencha todos os campos corretamente!';
     }
   }
 }
